@@ -140,7 +140,7 @@ zlabel(player.Axes,'Z (m)');
 veloReader.CurrentTime = veloReader.StartTime;
 frameCount = 0;
 
-while(hasFrame(veloReader) && player.isOpen() && frameCount < length(veloGPST)-1)
+while(hasFrame(veloReader) && player.isOpen() )
     frameCount = frameCount + 1;
     ptCloudObj = readFrame(veloReader);
     
@@ -153,9 +153,7 @@ while(hasFrame(veloReader) && player.isOpen() && frameCount < length(veloGPST)-1
         continue;
     end
     % Check timestamp repeat
-    if (transENU(frameCount+1, 1)-transENU(frameCount, 1)) <=0
-        continue;
-    end
+    if 
     
     homoXYZ = [reshape(ptCloudObj.Location(:,:,1), [], 1)';     % X-Point clouds sequenced by line ID No. in one row 1
         reshape(ptCloudObj.Location(:,:,2), [], 1)';            % Y-Point clouds sequenced by line ID No. in one row 2
